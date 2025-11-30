@@ -1,0 +1,965 @@
+---
+title: "Show, Don't Tell: GitHub as Hidden Curriculum"
+subtitle: How GitHub Can Help You Get Hired
+date: 2025-12-02
+date-format: "DD MMMM, YYYY"
+author:
+  - name: Danilo Freire
+    orcid: 0000-0002-4712-6810
+    email: danilo.freire@emory.edu
+    affiliations: Emory University
+format:
+  clean-revealjs:
+    self-contained: true
+    code-overflow: wrap
+    footer: "[GitHub as Hidden Curriculum](https://github.com/danilofreire/dsc-2025)"
+revealjs-plugins:
+  - multimodal
+transition: slide
+transition-speed: default
+scrollable: true
+engine: knitr
+editor:
+  render-on-save: true
+---
+
+```{r}
+#| echo: false
+#| results: hide 
+knitr::opts_chunk$set(echo = TRUE)
+# Function to check if a package is installed, and install it if not
+install_if_missing <- function(package) {
+  if (!require(package, character.only = TRUE)) {
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
+
+# List of packages to ensure are installed and loaded
+packages <- c("emo", "fontawesome")
+
+# Apply the function to each package
+lapply(packages, install_if_missing)
+```
+
+# Hello everyone! 🙋🏻 {background-color="#2d4563"}
+
+## Hi, I'm Danilo 👋🏻
+
+:::{style="font-size: 21px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Visiting Assistant Professor, Department of Data and Decision Sciences
+- Courses I teach: 
+  - [DATASCI 350 - Data Science Computing](https://danilofreire.github.io/qtm350/)
+  - [DATASCI 385 - Experimental Methods](https://danilofreire.github.io/qtm385/)
+  - [DATASCI 151 - Introduction to Statistical Computing II (Summer)](https://danilofreire.github.io/qtm151/)
+  - [DATASCI 185 - Introduction to Applied AI](https://danilofreire.github.io/qtm185/)
+- PhD in Political Economy, King's College London
+- Research interests: computational social science, causal inference, impact evaluation, and urban violence
+- `r fa('globe')` <https://danilofreire.github.io>
+- `r fa('github')` <https://github.com/danilofreire>
+- `r fa('envelope')` <danilo.freire@emory.edu>
+- `r fa('book')` <https://github.com/danilofreire/dsc-2025>
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+![<https://github.com/danilofreire>](figures/github-danilo.jpg){width="50%"}
+:::
+:::
+:::
+:::
+
+## Overview
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- What is the "hidden curriculum" and why it matters for you
+- Git and GitHub basics
+- Using GitHub to improve your job prospects
+- Anatomy of a good repository and best practices
+- Collaborating on GitHub and getting credit for your work
+- GitHub Pages: Your first portfolio in 5 minutes
+- Final thoughts and summary
+- Appendices: Practical exercises to improve your GitHub presence
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+![GitHub's Octocat mascot](figures/octocat.png){width="100%"}
+:::
+:::
+:::
+:::
+
+## What is the "hidden curriculum"? 🤔
+
+:::{style="font-size: 23px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- [Philip Jackson (1968)](https://www.google.com/books/edition/Life_in_Classrooms/W46Gu6wwYsQC?hl=en) argued that schools do more than just teach academic content
+- They also transmit [social norms, values, and expectations that are not explicitly stated in the formal curriculum]{.alert}
+- To succeed, you need to understand and [navigate this hidden curriculum]{.alert}
+- Formal Curriculum: "_Read Chapter 4 and write a summary._"
+- Hidden Curriculum: "_You must write this summary using a specific, formal academic tone; you should know that asking for an extension 24 hours before the deadline is acceptable, but 1 hour before is not; and you should know that visiting my office hours to discuss it will likely improve your grade, even though 'visiting office hours' isn't on the rubric._"
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+![](figures/jackson.jpg){width="60%"}
+:::
+:::
+:::
+:::
+
+## Why does it matter for you?
+
+:::{style="font-size: 30px; margin-top: 30px;"}
+- The hidden curriculum creates [an equity gap]{.alert} 
+- Students whose families have a history of higher education learn those rules informally
+- First-generation, low-income, foreigners, or those unfamiliar with academia or labour markets [may struggle]{.alert}
+- This can be a major [source of anxiety]{.alert} and [self-doubt]{.alert} even for high-achievers
+- Many students, including myself, have learned these rules through [trial and error, often making mistakes along the way]{.alert}
+- More information here: <https://en.wikipedia.org/wiki/Hidden_curriculum>
+
+:::{.incremental}
+- [But don't worry]{.alert}, I'm here to help you navigate it! 🤓
+:::
+:::
+
+## OECD on the hidden curriculum
+
+:::{style="font-size: 24px; margin-top: 30px; text-align: center;"}
+![](figures/oecd.png){width="60%"}
+
+Source: [Organisation for Economic Co-operation and Development (2024)](https://oecdedutoday.com/the-hidden-curriculum-is-the-next-frontier-in-transforming-global-education/)
+:::
+
+# GitHub to the rescue! 👩🏼‍💻 {background-color="#2d4563"}
+
+## GitHub to the rescue!
+
+:::{style="font-size: 22px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- [GitHub.com](https://github.com) is the world's largest platform for [hosting and collaborating on code]{.alert}
+- Think about it as Google Docs for code
+- But it's also [much more than that!]{.alert}
+- It has become a [de facto portfolio]{.alert} for data scientists, programmers, and other professionals
+- Employers often look at candidates' GitHub profiles to [assess their skills and experience]{.alert}
+- Having a strong GitHub presence can [set you apart]{.alert} from other candidates
+- As we will see shortly, it can help you [credibly demonstrate your programming and soft skills]{.alert}, [indicate that you are proactive and consistent]{.alert}, and [show that you are a great team player!]{.alert}
+- If you don't have a GitHub account yet, [create one now!]{.alert}
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/github-student-pack.png)](#){data-modal-type="image" data-modal-url="figures/github-student-pack.png" width="75%"}
+
+<https://education.github.com/pack>
+:::
+
+- It's free and students get [additional perks]{.alert} through the [GitHub Student Developer Pack](https://education.github.com/pack)
+:::
+:::
+:::
+
+## An (extremely brief) introduction to Git and GitHub
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- [Git](https://git-scm.com/) is a version control system that helps you track changes to your code over time
+- It allows you to [collaborate with others]{.alert} on coding projects
+- [GitHub](https://github.com) is a web-based platform that uses Git to help you manage and share your code repositories
+- You can [create repositories]{.alert} (online folders), [add files]{.alert}, [commit changes]{.alert} (write messages about what you changed), and [push updates]{.alert} (upload changes to GitHub)
+- You can also [collaborate with others]{.alert} by [forking repositories]{.alert} (copying someone else's repo), [making pull requests]{.alert} (suggesting changes), and [reviewing code]{.alert}
+:::
+
+:::{.column width=50%}
+- Install Git (<https://git-scm.com/downloads>) and set up your GitHub account
+- To create a new repository, click the "+" icon in the top right corner of GitHub and select "New repository"
+- Name your repository, add a description, and choose whether to make it public or private
+- To clone a repository to your local machine, open your terminal and use the command `git clone <repository-url>`
+- To add files, use `git add <file-name>`; to commit changes, use `git commit -m "Your commit message"`; and to push updates, use `git push origin main`
+:::
+:::
+:::
+
+## Example GitHub workflow
+### Creating a new repository on GitHub
+
+:::{style="font-size: 24px; margin-top: 30px; text-align: center;"}
+[![Click to enlarge](figures/new-repository01.png){width="80%"}](#){data-modal-type="image" data-modal-url="figures/new-repository01.png"}
+:::
+
+## Example GitHub workflow
+### Cloning the repository to your local machine
+
+:::{style="font-size: 24px; margin-top: 30px; text-align: center;"}
+[![Click to enlarge](figures/new-repository02.png){width="80%"}](#){data-modal-type="image" data-modal-url="figures/new-repository02.png"}
+:::
+
+## Example GitHub workflow
+### Adding, committing, and pushing changes
+
+:::{style="font-size: 24px; margin-top: 30px; text-align: center;"}
+[![Click to enlarge](figures/new-repository03.png){width="60%"}](#){data-modal-type="image" data-modal-url="figures/new-repository03.png"}
+:::
+
+## Github Desktop
+
+:::{style="font-size: 27px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- If the terminal is too intimidating, you can use [GitHub Desktop](https://desktop.github.com/) instead
+- It provides a [graphical user interface]{.alert} for managing your repositories
+- You can do (almost) everything you would do in the terminal, but with buttons and menus
+- Great for beginners and to get started quickly!
+- Download it here: <https://desktop.github.com/> and read the documentation: <https://docs.github.com/en/desktop>
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/github-desktop.webp)](#){data-modal-type="image" data-modal-url="figures/github-desktop.webp"}
+
+Source: <https://desktop.github.com/>
+:::
+:::
+:::
+:::
+
+# Using GitHub to improve your job prospects 🚀 {background-color="#2d4563"}
+
+## Show, don't tell!
+### The job market has changed
+
+:::{style="font-size: 21px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- A degree gets you in the door...
+- [Proof gets you the job]{.alert}!
+- CVs say "I can do this." [GitHub says "Look, I *did* this."]{.alert}
+- Employers want to see [evidence of your skills]{.alert}, not just claims
+- Don't just list "Python" or "Project Management" on LinkedIn
+- Link to a Repo where [you actually used Python or managed a project]{.alert}
+- Reduces hiring risk for employers and makes you a more compelling candidate
+- Data analysts: [for you it's not optional]{.alert}!
+- Business analysts and other non-technical roles: [you understand modern workflows and can manage your projects without the chaos]{.alert}
+- Let's see some examples!
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center; margin-top: -40px;"}
+[![Click to enlarge](figures/github-diff.png)](#){data-modal-type="image" data-modal-url="figures/github-diff.png" width="90%"}
+
+Source: <https://matthewsetter.com/blog/item/better-git-diff-support>
+:::
+:::
+:::
+:::
+
+## Anatomy of a good repository
+
+:::{style="font-size: 23px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- A good repository should have:
+  - A clear and descriptive [name]{.alert} (e.g., `market-trends-latam-2025`)
+  - An [informative description]{.alert} summarising the project's purpose
+  - A [detailed README file]{.alert} that explains the project, its purpose, and how to use it
+  - [Folders]{.alert} organising code, data, and documentation
+  - Well-organised [code with comments]{.alert} explaining key sections
+  - A [license file]{.alert} specifying how others can use your code
+  - [Issues and pull requests]{.alert} demonstrating collaboration and problem-solving (if applicable)
+:::
+
+:::{.column width=50%}
+:::{style="font-size: 17px; text-align: center;"}
+```
+market-trends-latam-2025/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── data/
+│   ├── raw/
+│   │   └── dataset.csv
+│   └── processed/
+│       └── cleaned_data.csv
+├── src/
+│   ├── data_processing.py
+│   ├── analysis.py
+│   └── visualisation.py
+├── notebooks/
+│   ├── 01_exploratory_analysis.ipynb
+│   └── 02_modeling.ipynb
+├── tests/
+│   ├── test_data_processing.py
+│   └── test_analysis.py
+├── figures/
+│   ├── trend_analysis.png
+│   └── correlation_matrix.png
+└── docs/
+    ├── methodology.md
+    └── results_summary.md
+```
+:::
+:::
+:::
+:::
+
+## `.gitignore` files
+### Stop committing junk!
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- A `.gitignore` file tells Git which [files or folders to ignore when committing changes]{.alert}
+- This is important to avoid committing unnecessary or sensitive files, such as:
+  - Temporary files (e.g., `.DS_Store`, `thumbs.db`)
+  - Environment files (e.g., `env/`, `venv/`, `.env`)
+  - Large data files that shouldn't be in the repository
+  - [API keys or passwords]{.alert}
+- You can create a `.gitignore` file manually or use templates from [gitignore.io](https://www.toptal.com/developers/gitignore) (recommended)
+:::
+
+:::{.column width=50%}
+:::{style="font-size: 17px; text-align: center;"}
+```
+# Created by https://www.toptal.com/developers/gitignore/api/python,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,macos
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
+
+### Python Patch ###
+# Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
+poetry.toml
+
+# ruff
+.ruff_cache/
+
+# LSP config files
+pyrightconfig.json
+
+# End of https://www.toptal.com/developers/gitignore/api/python,macos
+```
+
+Source: <https://gitignore.io>
+:::
+:::
+:::
+:::
+
+## Git commit etiquette
+### Write good commit messages
+
+:::{style="font-size: 28px; margin-top: 30px;"}
+- A good commit message should be:
+  - [Clear and concise]{.alert}: summarise the changes in a few words
+  - [Descriptive]{.alert}: explain why the change was made, not just what was changed
+  - [Consistent]{.alert}: follow a standard format for all commit messages
+- [Bad]{.alert}: "fixed stuff", "typo", "final version"
+- [Good]{.alert}: "Fix calculation error in revenue model", "Update README with installation steps", "Add unit tests for data processing functions"
+- [The rule]{.alert}: use the Imperative Mood ("Add", not "Added")
+:::
+
+## `README.md` files: Your project's front page
+### Make a strong first impression!
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+- The README file is the [first thing visitors see]{.alert} when they visit your repository
+- It should provide a clear overview of the project, including:
+  - Project title and description
+  - Installation instructions
+  - Usage examples
+  - Contribution guidelines (if applicable)
+  - Contact information
+  - License information
+
+- A well-crafted README can make a strong first impression and encourage others to check your work
+- It also shows [soft skills]{.alert} like communication, attention to detail, and professionalism
+- Learn [how to use Markdown](https://www.markdownguide.org/basic-syntax/) to format your README effectively
+- Use your LLM of choice too!
+:::
+
+## Example `README.md` file
+
+:::{style="font-size: 20px; margin-top: 30px;"}
+````{verbatim}
+# Market Trends Analysis in Latin America (2025)
+
+## Overview
+
+This project analyses market trends in Latin America for the year 2025 using Python and various data
+analysis libraries. 
+
+## Repository Structure
+
+This repository is organised as follows:
+
+- `data/`: Contains raw and processed datasets
+- `src/`: Source code for data processing, analysis, and visualisation
+- `notebooks/`: Jupyter notebooks for exploratory data analysis and modeling
+- `figures/`: Visualisations generated from the analysis
+- `docs/`: Documentation related to the project
+
+## Installation
+
+To run this project, clone the repository and install the required packages:
+
+```
+git clone
+pip install -r requirements.txt
+```
+
+## Usage
+
+Run the main analysis script:
+
+```
+python src/analysis.py
+```
+
+## Contribution
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## Contact
+
+For questions or feedback, contact Danilo Freire at <danilo.freire@example.com> or open an issue on GitHub.
+
+## License
+
+This project is licensed under the MIT License.
+````
+
+- A real example here: <https://github.com/danilofreire/qtm350>
+:::
+
+## The profile `README.md` file
+### Your personal landing page on GitHub
+
+:::{style="font-size: 27px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- You can create [a special repository named exactly as your GitHub username]{.alert} (e.g., `danilofreire`)
+- This repository should contain a `README.md` file that [serves as your personal landing page on GitHub]{.alert}
+- Use this space to introduce yourself, highlight your skills, showcase your projects, and provide links to your portfolio or LinkedIn profile
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/chris.png)](#){data-modal-type="image" data-modal-url="figures/chris.png"}
+
+Source: <https://github.com/ck37>
+:::
+:::
+:::
+:::
+
+## The contribution graph (the green squares)
+### Show your consistency
+
+:::{style="font-size: 27px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- The contribution graph on your GitHub profile shows your activity over time
+- Regular contributions, even small ones, demonstrate [consistency]{.alert}
+- Aim to make [frequent commits]{.alert}, even if they are minor updates or fixes
+- Cramming the night before is not as impressive as consistent effort over weeks and months!
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center; margin-top: 10px;"}
+[![Click to enlarge](figures/hadley.png)](#){data-modal-type="image" data-modal-url="figures/hadley.png"}
+
+Source: <https://github.com/hadley>
+:::
+:::
+:::
+:::
+
+# Collaborating on GitHub 🤝 {background-color="#2d4563"}
+
+## The `feature-branch` workflow
+
+:::{style="font-size: 21px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Collaborating on GitHub often involves using [branches]{.alert}
+- A branch is a [separate version of the codebase]{.alert} where you can work on new features or fixes without affecting the main code
+- [The `main` branch]{.alert} (or `master` in older repositories) should only contain [stable, production-ready code]{.alert}. [Don't mess it up!]{.alert} 😂
+- Create a new branch for each feature or fix you work on (e.g., `feature-login`, `bugfix-typo`, `new-module`)
+- If you're working by yourself, branches are not strictly necessary, but they are a good habit to develop
+- When you're done with your changes, you can [open a pull request]{.alert} to merge your branch back into `main`
+- This allows for [code review]{.alert} and discussion before changes are integrated
+:::
+
+:::{.column width=50%}
+:::{style="font-size: 17px; text-align: center;"}
+```
+1. Create a new branch from `main`
+git checkout -b feature-branch
+
+2. Check if you are on the new branch
+git branch
+
+3. Make changes and commit them
+git add <file-name>
+git commit -m "Add new feature that does X, Y, and Z"
+
+4. Push the branch to GitHub
+git push origin feature-branch
+
+5. Open a pull request on GitHub to merge `feature-branch` into `main`
+```
+
+[![Click to enlarge](figures/feature-branch.png)](#){data-modal-type="image" data-modal-url="figures/feature-branch.png"}
+
+Source: <https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow>
+:::
+:::
+:::
+:::
+
+## Pull requests and issues
+
+:::{style="font-size: 27px; margin-top: 30px;"}
+- A pull request (PR) is [a request to merge changes from one branch into another]{.alert}
+- PRs allow for [discussion and review of code changes]{.alert} before they are integrated
+- When you open a PR, [provide a clear description of the changes you made and why]{.alert}
+- This is also an opportunity to [showcase your communication skills]{.alert}
+- [Issues]{.alert} are used to [comment on bugs, suggest new features, or ask questions]{.alert}
+- They are [not as useful to your profile as pull requests]{.alert}, but it shows that you are engaged and proactive
+- More information here: <https://docs.github.com/en/pull-requests> and <https://docs.github.com/en/issues>
+:::
+
+## Pull requests and issues
+
+:::{style="font-size: 21px; margin-top: 30px; text-align: center;"}
+:::{.columns}
+:::{.column width=50%}
+[![Click to enlarge](figures/pull-request.png){width=70%}](#){data-modal-type="image" data-modal-url="figures/pull-request.png"}
+
+Source: [https://www.researchgate.net](https://www.researchgate.net/figure/An-example-Github-pull-request-667-from-junit-team-junit-edited-for-space-The_fig1_266656199)
+:::
+
+:::{.column width=50%}
+[![Click to enlarge](figures/issues.png)](#){data-modal-type="image" data-modal-url="figures/issues.png"}
+
+Source: <https://github.com/danilofreire/dotfiles/issues/1>
+:::
+:::
+:::
+
+## Getting credit for your contributions
+### You already do!
+
+:::{style="font-size: 22px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Any employer can [see your contributions]{.alert} to public repositories on GitHub
+- How? GitHub [automatically tracks contributions]{.alert} based on commits, pull requests, and issues
+- To ensure your contributions are counted:
+- [Use the same email address]{.alert} for Git commits as the one associated with your GitHub account
+- Make sure your [commits are pushed to the repository on GitHub]{.alert}
+- Your contributions will then appear on your GitHub profile under the "Contributions" section and if you click on "Insights" > "Contributors" in a repository
+- This is how [you can verify your work history]{.alert} (show, don't tell, remember?)
+:::
+
+:::{.column width=50%}
+:::{style="font-size: 17px; text-align: center;"}
+[![Click to enlarge](figures/contributions.png)](#){data-modal-type="image" data-modal-url="figures/contributions.png"}
+
+Source: <https://github.com/danilofreire/legislature-size-meta-analysis/graphs/contributors>
+:::
+:::
+:::
+:::
+
+## GitHub Pages
+
+:::{style="font-size: 22px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Finally, let's talk about [GitHub Pages](https://pages.github.com/)
+- GitHub Pages allows you to [host static websites directly from your GitHub repositories]{.alert}
+- You can use it to, of course, [showcase your projects, portfolio, or blog]{.alert}
+- It's free and you get a custom URL too: `https://yourusername.github.io/your-repo-name/`
+- You can use [Jekyll](https://jekyllrb.com/), [Hugo](https://gohugo.io/), or even plain HTML/CSS/JavaScript
+- This is probably [the most impressive way]{.alert} to demonstrate your skills and projects to potential employers
+- Even a simple website or portfolio can make a big difference!
+- More information here: <https://docs.github.com/en/pages>
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/github-pages.png)](#){data-modal-type="iframe" data-modal-url="https://danilofreire.github.io/qtm350/"}
+
+Source: <https://danilofreire.github.io/qtm350/>
+:::
+:::
+:::
+:::
+
+## Your first portfolio in 5 minutes
+### The "fork" strategy
+
+:::{style="font-size: 19px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Building a website from scratch (HTML/CSS) is hard and time-consuming
+- The "Hacker" way: [Don't start from scratch. Fork a template!]{.alert}
+- **Step 1:** Find a Jekyll theme you like (e.g., [online-cv](https://github.com/sharu725/online-cv) or [academicpages](https://github.com/academicpages/academicpages.github.io))
+- **Step 2:** Click the "Fork" button (top right) to copy it to your account
+- **Step 3:** Rename the repository to `yourusername.github.io`
+- **Step 4:** Edit the `_config.yml` (or `data.yml` in some projects) file to add your name and details
+- **Step 5:** Commit the changes, go to "Settings" > "Pages", and select the `main` (or `master`) branch as the source
+- **Result:** You have a professional website live at `https://yourusername.github.io`!
+- Search for "Jekyll themes" on Google to find more templates, such as <https://jekyllthemes.io/free>
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/forking.png)](#){data-modal-type="image" data-modal-url="figures/forking.png"}
+
+*GitHub automatically builds the site when you commit changes to the config file.*
+:::
+:::
+:::
+:::
+
+## GitHub Pages in action
+### A live example
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+:::{.columns}
+:::{.column width=50%}
+- Let's see how this works in practice!
+- I will show you how to fork a template repository
+- Then we'll edit the configuration file together
+- Finally, we'll deploy the site and see it live
+- This is exactly what you can do in [less than 5 minutes]{.alert}
+- No coding experience required!
+- I will use the [online-cv template](https://github.com/sharu725/online-cv) for this demo
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![Click to enlarge](figures/github-pages-demo.png)](#){data-modal-type="iframe" data-modal-url="https://jekyllthemes.io/theme/online-cv"}
+
+Source: <https://jekyllthemes.io/theme/online-cv>
+:::
+:::
+:::
+:::
+
+# Final thoughts 🧠 {background-color="#2d4563"}
+
+## Summary: how to use GitHub to boost your career
+
+:::{style="font-size: 30px; margin-top: 30px;"}
+- GitHub helps you [navigate this hidden curriculum]{.alert}
+- [Your code is better than claims]{.alert}: Let your repositories demonstrate your technical abilities
+- [Documentation proves communication skills]{.alert}: Write good, detailed README files, including your personal profile README
+- [Pull requests prove teamwork]{.alert}: Show you can work in professional environments
+- [Consistency builds credibility]{.alert}: Regular commits show you're proactive when nobody is grading you
+- [Your portfolio showcases your best work]{.alert}: GitHub Pages transforms your repositories into a website
+- You go from a candidate with claims into a candidate with proof!
+:::
+
+## The professional checklist
+### Before you send your link to a recruiter...
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+- [Clean up your repository names]{.alert}: `final_project_v2` looks like a school assignment. `predictive-maintenance-model` looks like professional work
+- [Pin your best work and check your profile README]{.alert}: Use the "Customise your pins" feature to showcase your best repositories
+- [Test all your links]{.alert}: Does that live demo actually load? Broken links look unprofessional
+- [Add a license]{.alert}: MIT license is a great default
+- [Curate your gallery]{.alert}: Make those half-finished "hello world" experiments private. Your profile should tell [a story of competence and completion]{.alert}
+- [Check your commit history]{.alert}: A profile with small, regular commits looks like a career. One massive commit from 6 months ago looks like you forgot about GitHub until yesterday
+- And finally...
+
+:::{.incremental}
+- [Don't forget to smile]{.alert}! Have fun along the way 😊
+- I'm already rooting for all of you!
+:::
+:::
+
+# Thank you! 🙏🏻 {background-color="#2d4563"}
+
+## Q&A and contact info
+
+:::{style="font-size: 40px; margin-top: 50px; text-align: center;"}
+<br>
+**Any questions?**
+
+<br>
+<https://danilofreire.github.io>
+<br>
+<br>
+<danilo.freire@emory.edu>
+<br>
+<br>
+`r fa('github')` <https://github.com/danilofreire>
+
+:::
+
+# Appendix: Some exercises {background-color="#2d4563"}
+
+## Exercise 1: the "hello world" (beginner)
+
+:::{style="font-size: 27px; margin-top: 30px;"}
+1.  [Create an Account:]{.alert} Go to GitHub.com and sign up (if you haven't)
+2.  [Create a Repo:]{.alert} Click `+` -> `New Repository`
+3.  [Name it:]{.alert} `my-first-repo`
+4.  [Check the box:]{.alert} ✅ Initialise this repository with a README
+5.  [Edit:]{.alert} Click the pencil icon ✏️ on the README file
+6.  [Write:]{.alert} "Hello! I am [Name] and I am learning the hidden curriculum of tech"
+7.  [Commit:]{.alert} Scroll down, type "Update introduction", and click **Commit changes**
+
+[Congratulations! You just pushed your first code to the cloud]{.alert} ☁️
+:::
+
+## Exercise 2: the "profile polisher" (beginner)
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+- [Create your profile repository:]{.alert} Create a new repository named exactly as your GitHub username (e.g., `yourusername`)
+- [Write a compelling README:]{.alert} that includes:
+  - A professional introduction about yourself
+  - Your key skills and technologies (with icons!)
+  - Current projects you're working on
+  - Links to your portfolio, LinkedIn, or other professional profiles
+  - GitHub stats or contribution graphs
+- [Pin your best repositories:]{.alert} to the top of your profile (use the "Customize your pins" feature)
+- [Add a professional profile picture:]{.alert} and update your bio
+
+[The impact:]{.alert} This is often the [first thing recruiters see]{.alert}. A polished profile immediately signals professionalism and makes them want to explore your work further.
+:::
+
+## Exercise 3: the "documentation hero" (beginner)
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+- [Find a repository]{.alert} with a poor README (or use one of your existing repos that needs improvement)
+- [Fork it]{.alert} to your account and clone it locally
+- [Enhance the README]{.alert} with:
+  - Better structure and organization
+  - Clear installation steps
+  - Usage examples with code snippets
+  - Badges for build status, license, etc.
+  - A "Contributing" section
+- [Commit your changes:]{.alert} with descriptive messages like "Add installation instructions" and "Include usage examples"
+- [Push back to GitHub:]{.alert}
+
+[Why this matters:]{.alert} Employers value candidates who can explain their work!
+:::
+
+## Exercise 4: the "portfolio page" (expert)
+
+:::{style="font-size: 24px; margin-top: 30px;"}
+1.  [Find a Template:]{.alert} Go to <https://github.com/academicpages/academicpages.github.io> or <https://github.com/sharu725/online-cv>
+2.  [Fork It:]{.alert} Click the "Fork" button (top right) to copy it to your account
+3.  [Rename:]{.alert} Go to Settings and rename the repository to `yourusername.github.io`
+4.  [Edit:]{.alert} Click on `_config.yml` and edit your name, bio, and social links
+5.  [Commit:]{.alert} Save your changes
+6.  [Configure Pages:]{.alert} Go to "Settings" > "Pages" and select the `main` (or `master`) branch as the source
+7.  [Wait:]{.alert} GitHub will automatically build your site (takes 1-2 minutes)
+8.  [Check:]{.alert} Go to `https://yourusername.github.io` and see your live portfolio!
+
+[You now have a professional website that showcases your work!]{.alert} 🎉
+:::
